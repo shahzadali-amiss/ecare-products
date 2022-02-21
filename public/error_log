@@ -1,0 +1,2 @@
+[14-Feb-2022 12:05:33 UTC] PHP Parse error:  syntax error, unexpected '|', expecting variable (T_VARIABLE) in /home/irfawugf/public_html/projects/angels_basket/public/mahir_india/vendor/psr/log/src/LoggerInterface.php on line 30
+[14-Feb-2022 12:05:33 UTC] PHP Fatal error:  Exception thrown without a stack frame in Unknown on line 0

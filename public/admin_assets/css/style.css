@@ -1,0 +1,18 @@
+select.form-control {
+    background: transparent!important;
+}
+
+.sidebar{
+  float: left;
+}
+
+.content-wrapper .card-title:first-child{
+  padding: 15px;
+}
+
+.msg_size{
+    font-size: 12px;
+}
+.form-control:read-only {
+    background-color: transparent;
+}

@@ -1,0 +1,96 @@
+.multistep-form #regForm {
+  background-color: #ffffff;
+  margin: 50px auto;
+  font-family: Raleway;
+  padding: 40px;
+  width: 70%;
+  min-width: 300px;
+}
+
+.multistep-form h1 {
+  text-align: center;  
+}
+
+.multistep-form input, .multistep-form select {
+  padding: 10px;
+  width: 100%;
+  font-size: 17px;
+  font-family: Raleway;
+  border: 1px solid #aaaaaa;
+}
+
+/* Mark input boxes that gets an error on validation: */
+.multistep-form input.invalid, .multistep-form select.invalid {
+  background-color: #ffdddd;
+}
+
+/* Hide all steps by default: */
+.multistep-form .tab {
+  display: none;
+}
+
+.multistep-form button {
+  background-color: #04AA6D;
+  color: #ffffff;
+  border: none;
+  padding: 10px 20px;
+  font-size: 17px;
+  font-family: Raleway;
+  cursor: pointer;
+}
+
+.multistep-form button:hover {
+  opacity: 0.8;
+}
+
+.multistep-form #prevBtn {
+  background-color: #bbbbbb;
+}
+
+/* Make circles that indicate the steps of the form: */
+.multistep-form .step {
+  height: 40px;
+  width: 40px;
+  margin: 0 px;
+  background-color: #fff;
+  border: none;  
+  border-radius: 50%;
+  display: inline-block;
+  opacity: 1;
+  position: relative;
+  z-index: 999;
+}
+
+.multistep-form .step-cont{
+  width:20%;
+  display: inline-block;
+  margin: 0;
+  position: relative;
+}
+.multistep-form .step-cont:not(:last-child):after{
+  content: "";
+  width:100%;
+  position: absolute;
+  background-color: #999;
+  height:5px;
+  transform: translate(-20px, 17px);
+}
+
+/*.multistep-form .no-bar:after*/
+
+.multistep-form .step small{
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%,-50%);
+}
+
+.multistep-form .step.active {
+  opacity: 1;
+}
+
+/* Mark the steps that are finished and valid: */
+.multistep-form .step.finish {
+  background-color: #005000;
+  color:#fff;
+}
