@@ -1,23 +1,94 @@
-<!-- Banners-->
-      <section class="container mt-5 pt-md-4">
-        <div class="row">
-          <div class="col-md-8 mb-4 mb-md-0">
-            <div class="d-sm-flex justify-content-between align-items-center bg-secondary overflow-hidden rounded-3">
-              <div class="py-4 my-2 my-md-0 py-md-5 px-4 ms-md-3 text-center text-sm-start">
-                <h4 class="fs-lg fw-light mb-2">Hurry up! Limited time offer</h4>
-                <h3 class="mb-4">Converse All Star on Sale</h3><a class="btn btn-primary btn-shadow btn-sm" href="#">Shop Now</a>
-              </div><img class="d-block ms-auto" src="{{asset('img/shop/catalog/banner.jpg')}}" alt="Shop Converse">
+<div class="swiper mySwiper">
+      <div class="swiper-wrapper">
+        @foreach($banners as $banner)
+          <div class="swiper-slide">
+            <div class="slide_content">
+              <h2>{{ $banner->title }}</h2>
+              <h5>{{ $banner->subtitle }}</h5>
             </div>
+            <img src='{{ asset("banner_images/$banner->image") }}'>
           </div>
-          <div class="col-md-4 mb-4 mb-md-0">
-            <div class="d-flex flex-column h-100 justify-content-center bg-size-cover bg-position-center rounded-3" style="background-image: url({{asset('img/blog/banner-bg.jpg')}});">
-              <div class="py-4 my-2 px-4 text-center">
-                <div class="py-1">
-                  <h5 class="mb-2">Your Add Banner Here</h5>
-                  <p class="fs-sm text-muted">Hurry up to reserve your spot</p><a class="btn btn-primary btn-shadow btn-sm" href="#">Contact us</a>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
+        @endforeach
+      </div>
+      <div class="swiper-button-next"></div>
+      <div class="swiper-button-prev"></div>
+      <div class="swiper-pagination"></div>
+    </div>
+
+
+@push('styles')
+<link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/swiper/swiper-bundle.min.css"
+    />
+<!-- Demo styles -->
+    <style>
+      .swiper {
+        width: 100%;
+        height: 100%;
+      }
+
+      .swiper-slide {
+          height: 75vh;
+      }
+      .swiper {
+            margin-bottom: 50px;
+        }
+      .slide_content {
+          position: absolute;
+      }
+
+      .swiper-slide {
+        text-align: center;
+        font-size: 18px;
+        background: #fff;
+
+        /* Center slide text vertically */
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: -webkit-flex;
+        display: flex;
+        -webkit-box-pack: center;
+        -ms-flex-pack: center;
+        -webkit-justify-content: center;
+        justify-content: center;
+        -webkit-box-align: center;
+        -ms-flex-align: center;
+        -webkit-align-items: center;
+        align-items: center;
+      }
+
+      .swiper-slide img {
+        display: block;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+    </style>
+
+@endpush
+
+@push('scripts')
+ <!-- Swiper JS -->
+    <script src="https://cdn.jsdelivr.net/npm/swiper/swiper-bundle.min.js"></script>
+
+    <!-- Initialize Swiper -->
+    <script>
+      var swiper = new Swiper(".mySwiper", {
+        spaceBetween: 30,
+        centeredSlides: true,
+        autoplay: {
+          delay: 5000,
+          disableOnInteraction: false,
+        },
+        pagination: {
+          el: ".swiper-pagination",
+          clickable: true,
+        },
+        navigation: {
+          nextEl: ".swiper-button-next",
+          prevEl: ".swiper-button-prev",
+        },
+      });
+    </script>
+@endpush

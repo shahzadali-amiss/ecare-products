@@ -16,6 +16,7 @@ use App\Models\BannerAds;
 use App\Models\Supplier;
 
 
+// ---------------------------------------------------------------------------------------
 
 function getUser($mobile, $role){
 	$user=User::where('mobile', $mobile)->where('role', $role)->get()->toArray();
@@ -225,6 +226,7 @@ function getCityName($cid){
 }
 
 function getStateName($sid){
+    // dd($sid);
     $state=State::find($sid);
     if($state){
         return $state->name;

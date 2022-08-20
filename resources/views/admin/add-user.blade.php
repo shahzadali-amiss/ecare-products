@@ -23,12 +23,12 @@
                     <fieldset>
                       <div class="form-group">
                         <label for="firstname">Full Name</label>
-                        <input id="firstname" class="@error('name') is-invalid @enderror form-control" name="name" type="text" value="{{ $isEdit && $user->name ? $user->name:'' }}">
+                        <input id="firstname" class="@error('name') is-invalid @enderror form-control" name="name" type="text" value="{{ $isEdit && $user->name ? $user->name:'' }}" required>
                         @include('admin.inc.error_message',['name'=>'name'])
                       </div>
                       <div class="form-group">
                         <label for="email">Email</label> 
-                        <input id="email" class="@error('email') is-invalid @enderror form-control" name="email" type="email" value="{{ $isEdit && $user->email ? $user->email:'' }}">
+                        <input id="email" class="@error('email') is-invalid @enderror form-control" name="email" type="email" value="{{ $isEdit && $user->email ? $user->email:'' }}" required>
                         @include('admin.inc.error_message',['name'=>'email'])
                       </div>                      
                       <div class="form-group">
@@ -39,14 +39,14 @@
 
                       <div class="form-group">
                         <label for="parent">Role</label>
-                        <select class="@error('role') is-invalid @enderror form-control form-control-lg py-3" id="role" name="role">
+                        <select class="@error('role') is-invalid @enderror form-control form-control-lg py-3" required id="role" name="role">
                           <option value="">Select Role</option>
-                          <option value="a" {{ $isEdit && $user->role=='a' ? 'selected':'' }}>Admin</option>
+                          <!-- <option value="a" {{ $isEdit && $user->role=='a' ? 'selected':'' }}>Admin</option> -->
                           @if($isEdit)
-                          <option value="s" {{ $user->role=='s' ? 'selected':'' }}>Supplier</option>
+                          <!-- <option value="s" {{ $user->role=='s' ? 'selected':'' }}>Supplier</option> -->
                           <option value="c" {{ $user->role=='c' ? 'selected':'' }}>Customer</option>  
                           @else
-                          <option value="s" {{ $type=='supplier' ? 'selected':'' }}>Supplier</option>
+                          <!-- <option value="s" {{ $type=='supplier' ? 'selected':'' }}>Supplier</option> -->
                           <option value="c" {{ $type=='customer' || $type=='user' ? 'selected':'' }}>Customer</option>
                           @endif
                         </select>

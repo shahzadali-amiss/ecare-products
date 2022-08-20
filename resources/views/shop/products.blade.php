@@ -1122,7 +1122,7 @@
           @foreach( $products as $p )
           <!-- Product-->
 
-          <div class="col-lg-3 col-md-4 col-sm-6 mb-5">
+          {{-- <div class="col-lg-3 col-md-4 col-sm-6 mb-5">
             <div class="card product-card p-3 card-static">
               <!-- <button class="btn-wishlist btn-sm" type="button" data-bs-toggle="tooltip" data-bs-placement="left" title="Add to wishlist">
                 <i class="ci-heart"></i>
@@ -1189,7 +1189,7 @@
                 </div>
               </div>
             </div>
-          </div>
+          </div> --}}
           @endforeach
           @endif
           <!-- <hr class="my-3"> -->

@@ -15,13 +15,13 @@ class CreateBannerAdsTable extends Migration
     {
         Schema::create('banner_ads', function (Blueprint $table) {
             $table->id();
-            $table->enum('type', ['Primary','Secondary']);
+            $table->enum('type', ['Primary','Secondary'])->default('Primary');
             $table->string('title');
             $table->string('subtitle')->nullable();
             $table->string('tagline')->nullable();
-            $table->string('button_title')->default('Shop Now');
             $table->string('image');
-            $table->string('link');
+            $table->string('button_title')->default('Shop Now');
+            $table->string('link')->nullable();
             $table->boolean('status')->default(true);
             $table->timestamps();
         });

@@ -8,9 +8,13 @@
           <h4 class="card-title">{{ $is_edit ? 'Edit Category' : 'Add New Category' }}</h4>
           <div class="row">
             <div class="col-12">
-              @if(Session::has('msg'))
-              <div class="alert alert-warning" role="alert">
-                  <strong>Heads up!</strong> {{Session::get('msg')}}
+              @if(Session::has('success'))
+              <div class="alert alert-success" role="alert">
+                  <strong>Heads up!</strong> {{Session::get('success')}}
+              </div>
+              @elseif(Session::has('error'))
+              <div class="alert alert-danger" role="alert">
+                  <strong>Heads up!</strong> {{Session::get('error')}}
               </div>
               @endif
             </div>
@@ -33,7 +37,7 @@
                         <input id="name" class="@error('name') is-invalid @enderror form-control" name="name" type="text" value="{{ $is_edit ? $category->name : '' }}" >
                         @include('admin.inc.error_message',['name'=>'name']) 
                       </div>
-                      <div class="form-group">
+                      {{-- <div class="form-group">
                         <label for="parent">Grand Category</label>
                         <select class="@error('grand') is-invalid @enderror form-control form-control-lg py-3" id="level" name="grand">
 
@@ -55,9 +59,9 @@
                          
                         </select>
                        @include('admin.inc.error_message',['name'=>'grand']) 
-                      </div>
+                      </div> --}}
 
-                      <div class="form-group">
+                      {{-- <div class="form-group">
                         <label for="parent"> Parent Category</label>
                         
                         <select class="@error('parent') is-invalid @enderror form-control form-control-lg py-3" id="level" name="parent">
@@ -80,7 +84,7 @@
 
                         </select>
                        @include('admin.inc.error_message',['name'=>'parent'])  
-                      </div>
+                      </div> --}}
 
                       <div class="form-group">
                         <label for="image">Upload Image</label>

@@ -23,26 +23,29 @@ use App\Models\Product_attribute;
 class AdminController extends Controller
 {   
 
+    public function listBanners(){
+        $banners = BannerAds::get();
+        // dd($banners);
+        return view('admin.all_banners')->with(compact('banners'));
+    }
+
     // Constructor function that loads first whenever the AdminController is called
     public function __construct()
     {
-        $this->middleware(function ($request, $next){
-            //condition that run when admin not exist in session
-            if(!Session::has('admin')){
-                //redirect to admin login route
-                return redirect()->route('admin-login');
-            }
-        //if admin exist in session this will return the user's request
-        return $next($request);
-        });
+        // $this->middleware(function ($request, $next){
+        //     //condition that run when admin not exist in session
+        //     if(!Session::has('admin')){
+        //         //redirect to admin login route
+        //         return redirect()->route('admin-login');
+        //     }
+        // //if admin exist in session this will return the user's request
+        // return $next($request);
+        // });
     }
 
 
-    // return admin dashboard when session contains admin
     public function index(){
-        if(Session::has('admin')){
-            return view('admin.dashboard');
-        }
+        return view('admin.dashboard');
     }
 
     //removes the admin from session and returns admin login view
@@ -184,11 +187,11 @@ class AdminController extends Controller
 
             // ATTEMPT TO SAVE CATEGORYT
             if($category->save())
-                return back()->with('msg', 'Data updated');
+                return back()->with('success', 'Data updated');
 
             // NOT SAVED,
             // RETURN BACK WITH ERROR MSG
-            return back()->with('msg', 'Whoops, something went wrong? Pleae try after sometime');
+            return back()->with('error', 'Whoops, something went wrong? Pleae try after sometime');
         }
     }
 
@@ -204,135 +207,30 @@ class AdminController extends Controller
     //To show product categories to select while adding product
     public function showProductCategories(Request $request){
         if($request->isMethod('get')){
-        // $data['attributes'] = \App\Models\Attribute::all();
             $data['grands']= Category::with('childs')->where('category_type', 1)->where('status', true)->get();
             $data['categories'] = \App\Models\Category::all();
+            // dd($data);
             return view('admin.select-product-category', $data);
         }else{
             $request->validate([
                 'grand_category'=>'required',
-                'parent_category'=>'required',
-                'child_category'=>'required',
+                // 'parent_category'=>'required',
+                // 'child_category'=>'required',
             ]);
 
             // put category values in the session for use on next page
             Session::put('grand_category', $request->grand_category);
-            Session::put('parent_category', $request->parent_category);
-            Session::put('child_category', $request->child_category);
-            // $data['category']=$request->category;
-            // $data['category']=$request->category;
+
+            if($request->has('parent_category'))
+                Session::put('parent_category', $request->parent_category);
+            
+            if($request->has('child_category'))
+                Session::put('child_category', $request->child_category);
+            
             $data['category']=$request->child_category;
             return redirect()->route('add_product',$data);
         }
     }    
-    // ADD AND EDIT PRODUCTS
-    // public function addProduct(Request $request, $edit_id = null){
-    //     $is_edit = is_null($edit_id) ? false : true;
-    //     $data['is_edit'] = $is_edit;
-    //     // CHECK METHODE (GET OR POST)..............
-    //     if($request->isMethod('get')){
-
-    //             $data['category'] = $category;
-    //         if($is_edit){
-    //             $data['product'] = \App\Models\Product::find($edit_id);
-    //         }
-    //         else{
-    //             $data['product'] = [];   
-    //         }
-    //         $data['attributes']= \App\Models\Attribute::where('category_id', $category)->get();
-    //         // VIEW PRODUCT FORM PAGE (IN EDIT OR CREATE MODE)
-    //         return view('admin.add-product', $data);  
-    //     }
-    //     else{
-
-    //         // VALIDATE FIELDS....
-    //         //dd($request->all());
-    //         $request->validate([
-    //         'name'=>'required',
-    //         'category'=>'required',
-    //         'price'=>'required|numeric',
-    //         'dis_price'=>'required|numeric',
-           
-    //         ]);
-
-    //         // CHECK MODE (EDIT OR ADD)
-    //         if($is_edit){
-    //             if ($request->image) {
-    //                 // check if emage exixts in edit mode/.................
-    //                 $request->validate( [
-    //                 'image'=>'required|image|mimes:jpeg,png,jpg|max:2048'
-    //                 ]);  
-    //             }
-    //             $product = \App\Models\Product::find($request->edit_id);
-    //             if (!$product) {
-    //                 return back()->with('msg', 'Data not found');
-    //             }
-    //         }
-    //         else{
-    //             $request->validate( ['image'=>'required|image|mimes:jpeg,png,jpg|max:2048']);
-
-    //             // CREATE NEW PRODUCT OBJECT
-    //             $product = new \App\Models\Product();                
-
-    //         }
-            
-
-    //         // SET OTHER MODEL DATA
-    //         $product->name = $request->name;
-    //         $product->role_id = Auth::user()->id;
-    //         $product->category_id = $request->category;
-    //         $product->mrp = $request->price;
-    //         $product->offer_price = $request->dis_price;
-    //         $product->status = $request->status;
-
-    //         // IF EMAGE IS NOT PRESENT IN EDIT MODE...    
-    //         if ($is_edit and !$request->image) {
-                    
-    //         }
-    //         else{
-    //             $request->validate( ['image'=>'required|image|mimes:jpeg,png,jpg|max:2048']);
-    //             // STORE PRODUCT IMAG IN FOLDER
-    //             $destinationPath = public_path( '/product_images' );
-    //             $image = $request->file('image');
-    //             $fileName = 'image'.time() . '.'.$image->clientExtension();
-    //             $image->move( $destinationPath, $fileName );
-    //             $product->image = $fileName;
-    //         }
-
-    //         // SAVE IMAGE NAME IN DATABASE                
-
-    //         // ATTEMPT TO SAVE PRODUCT
-    //         if($product->save())
-    //         //dd($request->all());
-    //             $attributes= \App\Models\Attribute::where('category_id', $request->category)->get();
-                
-    //             foreach ($attributes as $key => $attribute) {
-    //                 $temp=strtolower($attribute->name);
-    //                 $attr=$temp.'_attribute_values';
-    //                 if ($request->has($attr)) {
-    //                     foreach ($request->$attr as $attr_value) {
-    //                         $attr_val=\App\Models\Attribute_value::find($attr_value); 
-    //                         if(!$attr_val){
-    //                             $attr_val= new \App\Models\Attribute_value();
-    //                             $attr_val->attribute_id=$attribute->id;
-    //                             $attr_val->value=$attr_value;
-    //                             $attr_val->save();
-    //                         }
-    //                         $product_attribute = new \App\Models\Product_attribute();
-    //                         $product_attribute->attribute_value_id=$attr_val->id;
-    //                         $product_attribute->product_id = $product->id;
-    //                         $product_attribute->save();
-    //                     }
-    //                 }
-    //             }
-
-    //             return back()->with('msg', 'Data updated');
-
-    //         // NOT SAVED,
-    //         // RETURN BACK WITH ERROR MSG
-    //         return back()->with('msg', 'Whoops, something went wrong? Pleae try after sometime');
-    //     }
-    // }
 
     // To add or edit the product
     public function addProduct(Request $request, $edit_id = null){
@@ -357,8 +255,8 @@ class AdminController extends Controller
             $request->validate([
                 'name'=>'required',
                 'grand_category'=>'required',
-                'parent_category'=>'required',
-                'child_category'=>'required',
+                // 'parent_category'=>'required',
+                // 'child_category'=>'required',
                 'price'=>'required|numeric',
                 'dis_price'=>'required|numeric',    
             ]);
@@ -411,14 +309,20 @@ class AdminController extends Controller
 
             }
                 
+            // dd($request->all());
 
             // SET OTHER MODEL DATA
             $product->name = $request->name;
             // $product->role_id = Session::get('admin.id');
             $product->role_id = 1;
-            $product->grand_category_id = $request->grand_category;
-            $product->parent_category_id = $request->parent_category;
-            $product->category_id = $request->child_category;
+
+            if($request->has('child_category') && !is_null($request->child_category))
+                $product->category_id = $request->child_category;
+            elseif($request->has('parent_category') && !is_null($request->parent_category))
+                $product->category_id = $request->parent_category;
+            else
+                $product->category_id = $request->grand_category;
+
             $product->mrp = $request->price;
             $product->offer_price = $request->dis_price;
 
@@ -588,24 +492,10 @@ class AdminController extends Controller
 
     public function viewUser(Request $request, $id){
         $user=User::find($id);
-        $data=[];
-        if($user){
-            $data['user']=$user;
-            if($user->role=='c'){
-                $data['role']='c';
-                $data['address']=Address::where(['role_id'=>$user->id, 'type'=>'delivery'])->first();
-            }elseif($user->role=='s') {
-                $data['role']='s';
-                $data['r_address']=Address::where(['role_id'=>$user->id, 'type'=>'registered'])->first();
-                $data['p_address']=Address::where(['role_id'=>$user->id, 'type'=>'pickup'])->first();
-                $data['supplier']=Supplier::where('role_id',$user->id)->first();
-                $data['bank']=Bank::where('role_id',$user->id)->first();
-            }elseif($user->role=='a') {
-                $data['role']='a';
-            }
-            return view('admin.view-user', $data);
-        }
-        return back()->with('error', 'User not found');
+        
+        // dd($user);
+        return view('admin.view-user', $user);
+        // return back()->with('error', 'User not found');
     }
 
     public function addUser(Request $request, $type,$editId=''){
@@ -827,10 +717,9 @@ class AdminController extends Controller
             // VALIDATE FIELDS....
             //dd($request->all());
             $request->validate([
-            'type'=>'required|in:Primary,Secondary',
             'status'=>'required',
             'title'=>'required',           
-            'link'=>'required',           
+            'image'=>'required'           
             ]);
 
             // CHECK MODE (EDIT OR ADD)
@@ -856,7 +745,7 @@ class AdminController extends Controller
 
             // SET OTHER MODEL DATA
             $banner->title = $request->title;
-            $banner->type = $request->type;
+            // $banner->type = $request->type;
             if(!is_null($request->subtitle))
                 $banner->subtitle = $request->subtitle;
             if(!is_null($request->tagline))

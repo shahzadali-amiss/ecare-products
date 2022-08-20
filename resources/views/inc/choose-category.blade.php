@@ -19,7 +19,7 @@
             @endforeach
           </select>
         </div>
-        <div class="col-lg-10 mb-5 d-none" id="parent_cont">
+       {{--  <div class="col-lg-10 mb-5 d-none" id="parent_cont">
           <label for="parent_category" class="mb-2 fw-bold">Select Parent Category</label>
           <select class="form-select me-2 text-capitalize" id="parent_category" name="parent_category">
             <option value="">Select Parent Category</option>
@@ -30,8 +30,8 @@
           <select class="form-select me-2 text-capitalize" id="child_category" name="child_category">
             <option value="">Select Child Category</option>
           </select>
-        </div>
-        <button class="btn btn-primary d-block m-auto w-50" type="submit" id="submit" disabled>Next</button>
+        </div> --}}
+        <button class="btn btn-primary d-block m-auto w-50" type="submit" id="submit">Next</button>
       </div>
     </form>
   </div>

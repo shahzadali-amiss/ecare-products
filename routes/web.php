@@ -28,7 +28,8 @@ use App\Http\Controllers\SellerController;
 
 //GUEST ROUTES STARTS HERE
         // route that returns the website landing page 
-Route::get('/', [FrontController::class, 'index'])->name('guest-home');
+Route::get('/', [FrontController::class, 'index'])->name('welcome');
+
         // route for registration as a customer
 Route::any('register', [FrontController::class, 'customerRegister'])->name('customer_register');
         // route for login as a customer
@@ -47,7 +48,7 @@ Route::any('admin/login', [FrontController::class, 'adminLogin'])->name('admin-l
 // Route::any('admin/vowel/a/e/i/o/u/register', [FrontController::class, 'adminRegister'])->name('register-new-admin');
         //
         // routes to view products of website
-Route::get('shop/product/single/{id?}',[FrontController::class , 'showSingle'])->name('single'); 
+Route::get('shop/product/single/{id}',[FrontController::class , 'showSingleProduct'])->name('single'); 
 Route::get('shop/products/{gid}/{pid}/{cid}', [FrontController::class , 'products'])->name('products');
 Route::get('shop/products', [FrontController::class , 'allProducts'])->name('all-products');  
 
@@ -62,10 +63,11 @@ Route::any('logout', [HomeController::class, 'logout'])->name('logout');
 Route::any('home/address', [HomeController::class, 'address'])->name('address');
 Route::get('home/orders', [HomeController::class, 'orders'])->name('orders');
 Route::post('shop/addtocart', [HomeController::class, 'addtocart'])->name('addtocart');
-Route::any('shop/cart', [HomeController::class, 'cart'])->name('cart');
-Route::any('shop/checkout/details', [HomeController::class, 'checkoutDetails'])->name('checkout-details');
-Route::get('shop/checkout/shipping', [HomeController::class, 'checkoutShipping'])->name('checkout-shipping');
-Route::get('shop/checkout/review', [HomeController::class, 'checkoutReview'])->name('checkout-review');
+Route::any('shop/cart', [FrontController::class, 'cart'])->name('cart');
+Route::post('shop/update_cart', [FrontController::class, 'updateCart'])->name('update_cart');
+Route::any('shop/checkout', [HomeController::class, 'checkout'])->name('checkout');
+Route::get('shop/checkout/shipping', [FrontController::class, 'checkoutShipping'])->name('checkout-shipping');
+Route::get('shop/checkout/review', [FrontController::class, 'checkoutReview'])->name('checkout-review');
 Route::any('shop/checkout/payment', [HomeController::class, 'prePayment'])->name('checkout-payment');
 Route::any('shop/checkout/payment-gateway', [HomeController::class, 'paymentGateway'])->name('payment-gateway');
 Route::get('shop/checkout/complete', [HomeController::class, 'checkoutComplete'])->name('checkout-complete');
@@ -134,6 +136,8 @@ Route::get('/admin/categories/all-categories', [AdminController::class, 'showCat
 Route::match(['get', 'post'], '/admin/add_category/{edit_id?}', [AdminController::class, 'AddCategory'])->name('add_category');
 
 Route::match(['get', 'post'], '/admin/add-ad-banner/{edit_id?}', [AdminController::class, 'addAdBanner'])->name('add_ad_banner');
+Route::match(['get', 'post'], '/admin/list_banners', [AdminController::class, 'listBanners'])->name('list_banners');
+
 Route::get('/admin/products/all-products', [AdminController::class, 'showProduct'])->name('admin-all-products');
 
 Route::match(['get', 'post'], '/admin/select_category', [AdminController::class, 'showProductCategories'])->name('showProductCategories');
@@ -162,6 +166,6 @@ Route::get('/admin/invoices/invoice', function(){
 // EXTRA ROUTES END 
 
 
-
-
 require __DIR__.'/auth.php';
+
+Auth::routes();

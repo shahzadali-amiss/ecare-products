@@ -20,16 +20,18 @@ class HomeController extends Controller
 {
     public function __construct()
     {
-        $this->middleware(function ($request, $next){
-            if(!Session::has('customer')){
-                return redirect()->route('customer_login');
-            }
-        return $next($request);
-        });
+        $this->middleware('auth');
+        // $this->middleware(function ($request, $next){
+        //     if(!Session::has('customer')){
+        //         return redirect()->route('customer_login');
+        //     }
+        // return $next($request);
+        // });
     }
+
     public function index(Request $request){
         if($request->isMethod('get')){
-            $data = $this->getAllData();
+            // $data = $this->getAllData();
             $data['page'] = 'Profile';
             return view('customer.profile', $data);
         }else{
@@ -154,68 +156,47 @@ class HomeController extends Controller
             }
         }
     }
+    public function checkout(Request $request){
 
-    public function cart(Request $request){
         if($request->isMethod('get')){
-            $data = $this->getAllData();
-            return view('shop.cart', $data);  
-        }else{
-            $request->validate([
-                'quantity.*' => 'required|numeric|min:1|max:5',
-            ]);
-            // dd($request->all());
-            foreach ($request->quantity as $key => $q) {
-                foreach (getCartProducts() as $index => $p) {
-                    if($key==$index){    
-                        if(!setCartProductQuantity($p->id, $q)){
-                            return back()->with('error','Something went wrong! Please try again');
-                        } 
-                    }
-                }
-            }
-
-            return redirect()->route('checkout-details');
-        }
-    }
-    public function checkoutDetails(Request $request){
-        if($request->isMethod('get')){
-            $data = $this->getAllData();
-            $address=Address::where('role_id', Session::get('customer.id'))->first();
-            $data['states']=State::where(['status'=>true])->get();
-            if($address){
-                $data['address']=$address;    
-            }
+            $data['items'] = \App\Models\Cart::where('user_id', auth::user()->id)->get();
+            $data['address'] = Address::where('user_id', auth::user()->id)->first();
             return view('shop.checkout-details', $data);
-        }else{
+        }
+        else{
+            // dd($request->all());
+
             $request->validate([
-                'name' => 'required',
-                'email' => 'required|email',
-                'mobile' => 'required|digits:10|numeric',
-                'state' => 'required|numeric',
-                'city' => 'required|numeric',
                 'house' => 'required',
-                'area' => 'required',
+                // 'apartment' => 'required',
+                'phone' => 'required',
+                // 'state' => 'required',
+                'city' => 'required',
                 'landmark' => 'required',
-                'zipcode' => 'required|numeric',
+                'pincode' => 'required|numeric',
             ]);
-            if(is_null($request->is_update)){
-                $address = new Address();
-            }else{
-                $address = Address::find($request->is_update);
-            }
-            $address->type='delivery';
-            $address->role_id=Session::get('customer.id');
-            $address->name=$request->name;
-            $address->email=$request->email;
-            $address->mobile=$request->mobile;
-            $address->house=$request->house;
-            $address->area=$request->area;
-            $address->landmark=$request->landmark;
-            $address->state=$request->state;
-            $address->city=$request->city;
-            $address->pincode=$request->zipcode;
-            if($address->save()){
-                return redirect()->route('checkout-review'); 
+            
+            // dd('working');
+
+            $address = Address::updateOrCreate(
+                ['user_id' => auth::user()->id],
+                [
+                    'house' => $request->house,
+                    'apartment' => $request->apartment,
+                    'phone' => $request->phone,
+                    'state' => $request->state,
+                    'city' => $request->city,
+                    'landmark' => $request->landmark,
+                    'pincode' => $request->pincode,
+                ]
+            );
+
+            // dd($address);
+
+            if($address){
+                // CART CALCULATION
+                // AND PROCEED TO PAYMENT
+                dd('stop');
             }
             
             return back()->with('error','Something went wrong! Please try again');
@@ -225,7 +206,8 @@ class HomeController extends Controller
 
     public function checkoutShipping(Request $request){
         if($request->isMethod('get')){
-            $data = $this->getAllData();
+            // $data = $this->getAllData();
+            $data = [];
             return view('shop.checkout-shipping', $data);
         }else{
             dd('');
@@ -234,7 +216,8 @@ class HomeController extends Controller
 
     public function checkoutReview(Request $request){
         if($request->isMethod('get')){
-            $data = $this->getAllData();        
+            // $data = $this->getAllData();        
+            $data = [];
             return view('shop.checkout-review', $data);
         }
     }

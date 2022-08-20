@@ -14,6 +14,7 @@ use App\Models\Attribute;
 use App\Models\Attribute_value;
 use App\Models\Product_attribute;
 // use App\Models\ProductAttributeValue;
+use App\Models\BannerAds;
 use Illuminate\Validation\Rules;
 use App\Models\OTP;
 use Validator;
@@ -22,6 +23,58 @@ use Session;
 
 class FrontController extends Controller
 {
+
+    public function updateCart(Request $request){
+        // dd($request->all());
+        foreach($request->cart as $cart_id => $values){
+            $cart = \App\Models\Cart::find($cart_id);
+            $cart->quantity = $values['quantity'];
+            $cart->save();
+        }
+        return back()->with('success', 'Cart Updated');
+    }
+
+    public function cart(Request $request){
+        if($request->isMethod('get')){
+            $data['items'] = \App\Models\Cart::visitor($request)->with('product')->available()->get();
+            return view('shop.cart', $data);  
+        }else{
+            $request->validate([
+                'quantity.*' => 'required|numeric|min:1|max:5',
+            ]);
+            // dd($request->all());
+            foreach ($request->quantity as $key => $q) {
+                foreach (getCartProducts() as $index => $p) {
+                    if($key==$index){    
+                        if(!setCartProductQuantity($p->id, $q)){
+                            return back()->with('error','Something went wrong! Please try again');
+                        } 
+                    }
+                }
+            }
+
+            return redirect()->route('checkout-details');
+        }
+    }
+
+    public function checkoutShipping(Request $request){
+        if($request->isMethod('get')){
+            // $data = $this->getAllData();
+            $data = [];
+            return view('shop.checkout-shipping', $data);
+        }else{
+            dd('');
+        }
+    }
+
+    public function checkoutReview(Request $request){
+        if($request->isMethod('get')){
+            // $data = $this->getAllData();        
+            $data = [];
+            return view('shop.checkout-review', $data);
+        }
+    }
+
     public function customerRegister(Request $request){
         if($request->isMethod('get')){    
             return view('auth.register');
@@ -261,34 +314,15 @@ class FrontController extends Controller
     }
 
     public function index(){
-        $data = $this->getAllData(); 
-         
+        // dd(\Cookie::get('visitor_id'));
+        $data['banners'] = BannerAds::where('status', true)->get();
+        $data['categories'] = \Helper::getCategories();
         return view('welcome', $data);
-
     }
 
-    public function showSingle($id=''){
-        $data = $this->getAllData();
-        // dd($id);
-        if($id){
-
-
-            $product =  Product::find($id);
-            $data['product']=$product;
-            $data['product_attributes']=getProductAttributes($id);
-            
-            // dd($data['product_attributes']);
-            // $data['product_attribute']=Product_attribute::with(['getAttributeValues' => function($q){
-            //     $q->where('is_verified', '=', true)->where('status', '=', true);
-            // }])->get();
-            // dd($data['product_attribute']);
-            $data['rel_products'] =  Product::where('category_id', $product->category_id)->where('id', 'not like', $id)->where('status', true)->get();
-            $data['more_products'] =  Product::where('parent_category_id', $product->parent_category_id)->where('id', 'not like', $id)->where('status', true)->get();
-        }
-        else{
-            dd('data not found');
-        }
-        
+    public function showSingleProduct($id){
+        $product = Product::find($id);
+        $data['product'] = $product->load('category','images');
         return view('shop.single2', $data);
     }
 
@@ -302,9 +336,33 @@ class FrontController extends Controller
     }
 
     public function allProducts(Request $request){
-        $data = $this->getAllData();
-        $data['products']=Product::where('status',true)->orderBy('id', 'desc')->get();
-        // dd($data['products']);
+        
+        $categories = Category::all();
+            
+        if (request()->category) {
+            $targetCategory = Category::find(request()->category);
+            $products = $targetCategory->products()->active();
+        } else {
+            $products = Product::active();
+        }
+
+        // if (request()->has('minPrice') && request()->has('maxPrice')) {
+        //     $products->where('price', '>=', request()->minPrice)
+        //              ->where('price', '<=', request()->maxPrice);
+        // }
+
+        if(request()->orderby){
+            if (request()->orderby == 'price-desc') {
+                $products = $products->orderBy('offer_price', 'desc');
+            } else if (request()->orderby == 'price') {
+                $products = $products->orderBy('offer_price');
+            } else {
+                $products = $products->latest();
+            }
+        }
+
+        $data['products'] = $products->paginate(12);
+
         return view('shop.all-products')->with($data);
        
     }

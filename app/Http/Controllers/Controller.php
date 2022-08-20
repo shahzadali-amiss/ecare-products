@@ -17,6 +17,9 @@ class Controller extends BaseController
 {
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
 
+    public function getAllData(){
+        return [];
+    }    
 
     // Delete category............
     public function delete($type, $id){
@@ -68,23 +71,6 @@ class Controller extends BaseController
         }else{
             return back()->with('error', 'Product not found');
         }
-    }
-
-    public function getAllData(){
-            $data['products'] = Product::where(['status'=>1])->get();
-            $data['t_products'] = Product::inRandomOrder()->limit(8)->get();
-            $data['categories'] = Category::where(['status'=>1])->get();
-            $data['grands'] = Category::where(['category_type'=>1,'status'=>1])->get();
-            $data['parents'] = Category::where(['category_type'=>2, 'status'=>1])->get();
-            $data['childs'] = Category::where(['category_type'=>3, 'status'=>1])->get();        
-            // if (Session::has('userId')) {
-            //     $data['user'] = User::find(Session::get('userId'));
-            //     // dd(Session());
-            //     }
-            // else{
-            //     $data['user'] = [];
-            //     } 
-            return $data;        
     }
 
     protected function getattributeandvalue($id){

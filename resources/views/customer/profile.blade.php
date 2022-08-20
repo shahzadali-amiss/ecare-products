@@ -1,84 +1,52 @@
-@extends('layouts.user')
+@extends('layouts.app')
 @section('content')
-<!-- Content  -->  
-<section class="col-lg-8"> 
-  <!-- Toolbar--> 
-  <div class="d-none d-lg-flex justify-content-between align-items-center pt-lg-3 pb-4 pb-lg-5 mb-lg-3">
-    <h6 class="fs-base text-light mb-0">Update you profile details below:</h6><a class="btn btn-primary btn-sm" href="{{ route('logout') }}"><i class="ci-sign-out me-2"></i>Sign out</a>
-  </div> 
-  @include('inc.session-message')
-  <!-- Profile form-->
-  <form method="post" action="{{route('home')}}">
-    @csrf
-    <!-- <div class="bg-secondary rounded-3 p-4 mb-4">
-      <div class="d-flex align-items-center"><img class="rounded" src="{{asset('img/shop/account/avatar.jpg')}}" width="90" alt="Susan Gardner">
-        <div class="ps-3">
-          <button class="btn btn-light btn-shadow btn-sm mb-2" type="button"><i class="ci-loading me-2"></i>Change avatar</button>
-          <div class="p mb-0 fs-ms text-muted">Upload JPG, GIF or PNG image. 300 x 300 required.</div>
-        </div>
+
+<section class="elementor-section elementor-section-boxed">
+  <div class="elementor-container elementor-column-gap-no">
+    
+    <div class="tabset">
+      <!-- Tab 1 -->
+      <input type="radio" name="tabset" id="tab1" aria-controls="marzen" checked>
+      <label for="tab1">My Profile</label>
+      <!-- Tab 2 -->
+      <input type="radio" name="tabset" id="tab2" aria-controls="my_orders">
+      <label for="tab2">My Orders</label>
+      
+      <div class="tab-panels">
+        <section id="marzen" class="tab-panel">
+          <h2>Welcome <b>{{ auth::user()->name }}</h2>
+            
+            <div class="form-group">
+              <label>Email</label>
+              <input type="text" value="{{ auth::user()->email }}" disabled>
+            </div>
+
+            <div class="form-group">
+              <label>Mobile</label>
+              <input type="text" value="{{ auth::user()->mobile }}" readonly>
+            </div>
+
+      </section>
+        <section id="my_orders" class="tab-panel">
+          <h2>My Orders</h2>
+          <p><strong>Overall Impression:</strong>  An elegant, malty German amber lager with a balanced, complementary beechwood smoke character. Toasty-rich malt in aroma and flavor, restrained bitterness, low to high smoke flavor, clean fermentation profile, and an attenuated finish are characteristic.</p>
+          <p><strong>History:</strong> A historical specialty of the city of Bamberg, in the Franconian region of Bavaria in Germany. Beechwood-smoked malt is used to make a Märzen-style amber lager. The smoke character of the malt varies by maltster; some breweries produce their own smoked malt (rauchmalz).</p>
+        </section>
       </div>
-    </div> -->
-    <div class="row gx-4 gy-3">
-      <div class="col-sm-12">
-        <label class="form-label" for="account-fn">Full Name</label>
-        <input class="form-control" type="text" id="account-fn" value="{{ Session::get('customer.name') }}" disabled>
-      </div>
-      <!-- <div class="col-sm-6">
-        <label class="form-label" for="account-ln">Last Name</label>
-        <input class="form-control" type="text" id="account-ln" value="" readonly>
-      </div> -->
-      <div class="col-sm-6">
-        <label class="form-label" for="account-email">Email Address</label>
-        <input class="form-control" type="email" name="email" id="account-email" value="{{  Session::get('customer.email') }}{{old('email')}}">
-      </div>
-      <div class="col-sm-6">
-        <label class="form-label" for="account-phone">Phone Number</label>
-        <input class="form-control" type="text" id="account-phone" value="{{  Session::get('customer.mobile') }}" disabled>
-      </div>
-      <div class="col-sm-12">
-        <div class="form-check">
-          <input class="form-check-input" type="checkbox" id="for-password">
-          <label class="form-check-label" for="for-password">Update password also</label>
-        </div>
-      </div>
+      
     </div>
-    <div class="row mt-4 d-none" id="password-row">
-      <div class="col-sm-6">
-        <label class="form-label" for="account-pass">New Password</label>
-        <div class="password-toggle">
-          <input class="form-control" type="password" id="password" name="password" required>
-          <label class="password-toggle-btn" aria-label="Show/hide password">
-            <input class="password-toggle-check" type="checkbox"><span class="password-toggle-indicator"></span>
-          </label>
-        </div>
-      </div>
-      <div class="col-sm-6">
-        <label class="form-label" for="account-confirm-pass">Confirm Password</label>
-        <div class="password-toggle">
-          <input class="form-control" type="password" id="password_confirmation" required name="password_confirmation">
-          <label class="password-toggle-btn" aria-label="Show/hide password">
-            <input class="password-toggle-check" type="checkbox"><span class="password-toggle-indicator"></span>
-          </label>
-        </div>
-      </div>
-    </div>
-    <div class="row">
-      <div class="col-12">
-        <hr class="mt-4 mb-3">
-        <div class="d-flex flex-wrap justify-content-between align-items-center">
-          <!-- <div class="form-check">
-            <input class="form-check-input" type="checkbox" name="" id="subscribe_me" checked>
-            <label class="form-check-label" for="subscribe_me">Subscribe me to AtaaHai</label>
-          </div> -->
-          <button class="btn btn-primary mt-3 mt-sm-0" type="submit">Update Profile</button>
-        </div>
-      </div>
-    </div>
-  </form>
+
+  </div>
 </section>
+
 @endsection
 
+@push('styles')
+<link rel="stylesheet" type="text/css" href="{{ asset('frontend/css/user_profile.css') }}">
+@endpush
+
 @push('scripts')
+
 <script type="text/javascript">
   jQuery(document).ready(function($){
     $('#for-password').on('click', function(){

@@ -1,4 +1,4 @@
-@extends('layouts.common')
+@extends('layouts.app')
 @section('content')
   <div class="page-title-overlap bg-dark pt-4">
     <div class="container d-lg-flex justify-content-between py-2 py-lg-3">
@@ -63,23 +63,23 @@
           <table class="w-100">
             <tr>
               <th>Name</th>
-              <td>{{ucwords(getShippingAddress()->name)}}</td>
+              <td>Namenjjjj</td>
             </tr>
             <tr>
               <th>Email</th>
-              <td>{{getShippingAddress()->email}}</td>
+              <td></td>
             </tr>
             <tr>
               <th>Mobile</th>
-              <td>{{getShippingAddress()->mobile}}</td>
+              <td></td>
             </tr>
             <tr>
               <th style="vertical-align: top;">Address</th>
-              <td valign="top">{{ucwords(getShippingAddress()->house)}}, {{ucwords(getShippingAddress()->area)}},<br>{{ucwords(getShippingAddress()->landmark)}},<br>{{ucwords(getCityName(getShippingAddress()->city))}}, {{ucwords(strtolower(getStateName(getShippingAddress()->state)))}}</td>
+              <td valign="top">Address/.......</td>
             </tr>
             <tr>
               <th>Zipcode</th>
-              <td>{{getShippingAddress()->pincode}}</td>
+              <td>110044</td>
             </tr>
           </table>
         </div>

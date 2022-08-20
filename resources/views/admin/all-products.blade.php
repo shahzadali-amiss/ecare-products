@@ -54,7 +54,7 @@
                         <?php $counter +=1; ?>
                         <tr>
                           <td>{{$counter}}</td>
-                          <td class="py-1">
+                          <td>
                             <img src="{{asset('product_images/'.$pd->image)}}" alt="image"/>
                           </td>
                           <td>

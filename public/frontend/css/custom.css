@@ -1,0 +1,75 @@
+#home_category_products .elementor-element-populated{
+    background-size: 50%;
+    background-position: right;
+    background-color: #d3e9f2;
+}
+#home_category_products .elementor-element-populated.box0{background-color: #e5edbe;}
+#home_category_products .elementor-element-populated.box1{background-color: #cfebd2;}
+#home_category_products .elementor-element-populated.box2{background-color: #d3e9f2;}
+#home_category_products .elementor-element-populated.box3{background-color: #f9d0a8;}
+#home_category_products .elementor-element-populated.box4{background-color: #e5edbe;}
+#home_category_products .elementor-element-populated.box5{background-color: #d3e9f2;}
+#home_category_products .elementor-element-populated.box6{background-color: #cfebd2;}
+#home_category_products .elementor-element-populated.box7{background-color: #e5edbe;}
+#home_category_products .elementor-element-populated.box8{background-color: #f5f5f5;}
+
+
+#home_category_shop .elementor-widget-organey-banner .elementor-cta__bg-overlay{opacity: 0.2}
+#home_category_shop .elementor-widget-organey-banner:hover .elementor-cta__bg-overlay{opacity: 0.5}
+
+ul.pagination li:first-child, ul.pagination li:last-child {
+    padding: 0 15px;
+}
+ul.pagination li:first-child *, ul.pagination li:last-child * {
+    font-size: 40px;
+    line-height: 48px;
+}
+ul.pagination li {
+    float: left;
+    padding: 15px;
+}
+ul.pagination {
+    list-style: none;
+    float: right;
+    margin: 25px 0;
+    padding: 0;
+}
+ul.pagination li.active {
+    font-weight: bold;
+}
+
+.widget_shopping_cart div.shopping_cart img {
+    margin: auto auto;
+    max-width: 100%;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+}
+.widget_shopping_cart div.shopping_cart {
+    background: #f8f8f8;
+    width: 100%;
+}
+.alert.item_added_into_cart {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    /*left: 0;*/
+    right: 0;
+    z-index: 1231;
+    margin: 0 auto;
+    color: #fff;
+    display: none;
+}
+.alert.item_added_into_cart p {
+    display: table-cell;
+    vertical-align: top;
+    padding: 25px;
+    font-size: 20px;
+}
+.alert.item_added_into_cart p.success span {
+    background: #31c131;
+    padding: 10px 20px;
+}
+.hfe-site-logo-container img {
+    width: 75%;
+}

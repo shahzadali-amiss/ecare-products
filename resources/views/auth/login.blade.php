@@ -1,71 +1,86 @@
-<x-guest-layout>
-    <x-auth-card>
-        <x-slot name="logo">
-            <div class="w-100 m-auto text-center p-2 p-md-5 pb-md-0">
-                <a href="{{ route('guest-home') }}" title="Go to home" class="" rel="home">
-                      <img class="site_logo" id="logo" src="{{ asset('img/logo-dark.png') }}" alt="ATAA HAI">
-                </a>
+@extends('layouts.app')
+
+@section('content')
+
+    <section>
+        <div class="container">
+            <div class="row justify-content-center">
+            
+                <div class="col-xl-7 col-lg-8 col-md-12 col-sm-12">
+                    <form method="POST" action="{{ route('login') }}" autocomplete="off">
+                    @csrf
+                        <div class="crs_log_wrap">
+                            <div class="crs_log__thumb">
+                                <img src="{{ asset('theme/img/banner-2.jpg') }}" class="img-fluid" alt="" />
+                            </div>
+                            <div class="crs_log__caption">
+                                <div class="rcs_log_123">
+                                    <div class="rcs_ico"><i class="fas fa-lock"></i></div>
+                                </div>
+                                
+                                <div class="rcs_log_124">
+                                    <div class="Lpo09"><h4>Login Your Account</h4></div>
+                                    <div class="form-group">
+                                        <label>User Name</label>
+                                        
+                                        <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="off" autofocus>
+
+                                        @error('email')
+                                            <span class="invalid-feedback" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                        @enderror
+
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Password</label>
+
+                                        <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="off">
+
+                                        @error('password')
+                                            <span class="invalid-feedback" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                        @enderror
+                                    </div>
+                                    
+                                    <div class="form-group">
+                                        
+                                        <button type="submit" class="btn btn-primary">
+                                            {{ __('Login') }}
+                                        </button>
+                                        
+                                    </div>
+                                </div>
+                                <!-- <div class="rcs_log_125">
+                                    <span>Or Login with Social Info</span>
+                                </div>
+                                <div class="rcs_log_126">
+                                    <ul class="social_log_45 row">
+                                        <li class="col-xl-4 col-lg-4 col-md-4 col-4"><a href="javascript:void(0);" class="sl_btn"><i class="ti-facebook text-info"></i>Facebook</a></li>
+                                        <li class="col-xl-4 col-lg-4 col-md-4 col-4"><a href="javascript:void(0);" class="sl_btn"><i class="ti-google text-danger"></i>Google</a></li>
+                                        <li class="col-xl-4 col-lg-4 col-md-4 col-4"><a href="javascript:void(0);" class="sl_btn"><i class="ti-twitter theme-cl"></i>Twitter</a></li>
+                                    </ul>
+                                </div> -->
+                            </div>
+                            <div class="crs_log__footer d-flex justify-content-between">
+                                <div class="fhg_45"><p class="musrt">Don't have account? <a href="{{ route('register') }}" class="theme-cl">SignUp</a></p></div>
+
+                                @if (Route::has('password.request'))
+                                    <div class="fhg_45">
+                                        <p class="musrt">
+                                            <a href="{{ route('password.request') }}" class="text-danger">Forgot Password?</a>
+                                        </p>
+                                    </div>
+                                @endif
+
+                            </div>
+                        </div>
+                    </form>
+                </div>
+
             </div>
-        </x-slot>
-        <div class="m-auto reg-cont">
-
-            <!-- Session Status -->
-            <x-auth-session-status class="mb-4 text-danger text-center" :status="session('status')" />
-
-            <!-- Validation Errors -->
-            <x-auth-validation-errors class="mb-4 text-danger text-center" :errors="$errors" />
-
-            <form method="POST" action="{{ route('customer_login') }}" class="fw-bold p-3 p-md-5 rounded-3">
-                @csrf
-                <input type="hidden" value="c" id="role" name="role">
-                <!-- Email Address -->
-                <div class="row justify-content-center">
-                    <x-label class="col-lg-3 py-2" for="mobile" :value="__('Mobile :')" />
-
-                    <x-input id="mobile" class="col-lg-6 block mt-1 w-full border border-none rounded py-2 py-lg-1" type="text" name="mobile" :value="old('mobile')" required autofocus/>
-                </div>
-
-                <!-- Password -->
-                <div class="mt-4 row justify-content-center">
-                    <x-label class="col-lg-3 py-2" for="password" :value="__('Password :')" />
-
-                    <x-input id="password" class="col-lg-6 block mt-1 w-full border border-none rounded py-2 py-lg-1"
-                                    type="password"
-                                    name="password"
-                                    required autocomplete="current-password" />
-                </div>
-
-                <!-- Remember Me -->
-                <div class="block mt-4 text-center">
-                    <label for="remember_me" class="inline-flex items-center">
-                        <input id="remember_me" type="checkbox" class="rounded border-gray-300 text-indigo-600 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" name="remember">
-                        <span class="ml-2 text-sm text-gray-600">{{ __('Remember me') }}</span>
-                    </label>
-                </div>
-
-                <div class="flex text-center justify-end mt-2">
-                    @if (Route::has('password.request'))
-                        <a class="underline text-sm text-white" href="{{ route('password.request') }}">
-                            {{ __('Forgot your password?') }}
-                        </a>
-                    @endif
-
-                    <button type="submit" class="d-block m-auto mt-3 px-4 btn btn-primary">
-                        Log in
-                    </button>
-                </div>
-                <div class="flex text-center justify-end mt-3">
-                    Don't have an account? 
-                    <a class="text-decoration-underline text-sm text-dark" href="{{ route('customer_register') }}">
-                        {{ __('Register') }}
-                    </a>
-                </div>
-            </form>
         </div>
-        <div class="back-btn d-none d-lg-block">
-            <a href="{{ route('guest-home') }}" class="text-dark fw-bold text-decoration-none me-3">
-                &#8592;Home / Back
-            </a>
-        </div>
-    </x-auth-card>
-</x-guest-layout>
+    </section>
+
+@endsection

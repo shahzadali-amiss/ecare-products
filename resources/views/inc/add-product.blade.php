@@ -4,8 +4,12 @@
       <h2 class="h3 py-2 me-2 text-center text-sm-start">Add New Product</h2>
       <div class="py-2 text-center">
 
+        {{-- {{dd(Session::get('grand_category'))}} --}}
+        {{-- {{dd(getCategory())}} --}}
+        <span class="text-capitalize small">
+          {{ $is_edit ? ucwords(getCategory($product->category_id)->name) : ucwords(getCategory(Session::get('grand_category'))->name) }} > 
+        </span>
 
-        <span class="text-capitalize small">{{ $is_edit ? ucwords(getCategory($product->grand_category_id)->name):ucwords(getCategory(Session::get('grand_category'))->name) }} > {{ $is_edit ? ucwords(getCategory($product->parent_category_id)->name):ucwords(getCategory(Session::get('parent_category'))->name) }} > {{ $is_edit ? ucwords(getCategory($product->category_id)->name):ucwords(getCategory(Session::get('child_category'))->name) }}</span>
       </div>
     </div>
     @include('inc.session-message')
@@ -46,13 +50,14 @@
 
           <h4 class="text-center">Product Details</h4>
           <div class="bg-secondary rounded-3 p-4 mb-4">
-            <input type="hidden" name="grand_category" value="{{ $is_edit ? $product->grand_category_id:Session::get('grand_category') }}">
+          {{-- {{ dd(Session::all())}} --}}
+            <input type="hidden" name="grand_category" value="{{ $is_edit ? $product->category_id:Session::get('grand_category') }}">
         
             <input type="hidden" name="edit_id" value="{{ $is_edit ? $product->id:'' }}">
             
-            <input type="hidden" name="parent_category" value="{{ $is_edit ? $product->parent_category_id:Session::get('parent_category') }}">
+           {{--  <input type="hidden" name="parent_category" value="{{ $is_edit ? $product->parent_category_id:Session::get('parent_category') }}">
             <input type="hidden" name="child_category" value="{{ $is_edit ? $product->category_id:Session::get('child_category') }}">
-            
+             --}}
             <div class="mb-3 pb-2">
               <label class="form-label" for="unp-product-name">Product name</label>
               <input class="form-control" type="text" id="unp-product-name" name="name" value="{{ $is_edit ? $product->name:'' }}">
@@ -213,7 +218,7 @@
       </div>
       @endif
       <button class="btn btn-primary d-block w-100" type="submit">
-        <i class="ci-cloud-upload fs-lg me-2"></i>{{ $is_edit ? 'Update':'Upload' }} Product
+        <i class="ci-cloud-upload fs-lg me-2"></i>{{ $is_edit ? 'Update' : 'Add' }} Product
       </button> 
     </form>
   </div>

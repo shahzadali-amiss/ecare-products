@@ -15,18 +15,14 @@ class CreateAddressesTable extends Migration
     {
         Schema::create('addresses', function (Blueprint $table) {
             $table->id();
-            $table->enum('type', ['pickup','delivery','registered']);
-            $table->integer('role_id');
-            $table->string('name');
-            $table->string('email');
-            $table->string('mobile');
-            $table->string('house')->nullable();
-            $table->string('area')->nullable();
-            $table->string('pincode')->nullable();
-            $table->integer('state')->nullable();
-            $table->integer('city')->nullable();
+            $table->integer('user_id');
+            $table->string('house');
+            $table->string('apartment')->nullable();
+            $table->string('city');
+            $table->string('state')->nullable();
+            $table->string('pincode');
+            $table->string('phone');
             $table->string('landmark')->nullable();
-            $table->string('address')->nullable();
             $table->timestamps();
         });
     }

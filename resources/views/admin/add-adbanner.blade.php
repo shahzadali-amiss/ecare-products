@@ -25,35 +25,34 @@
 
                     @endif  
 
-
-                      <div class="form-group">
-                        <label for="title">Banner Title</label>
-                        <textarea id="title" class="form-control ckeditor @error('title') is-invalid @enderror" name="title">{{ $is_edit ? $banner->title : '' }}</textarea>
-                        @include('admin.inc.error_message',['name'=>'title']) 
-                      </div>
-
-                      <div class="form-group">
+                      <!-- <div class="form-group">
                         <label for="type">Banner Type</label>
                         <select class="form-control form-control-lg py-3 @error('type') is-invalid @enderror" id="type" name="type">
                           <option value="Primary" @if(@$banner->type == 'Primary') {{'selected'}}@endif>Primary</option>
                           <option value="Secondary" @if(@$banner->type == 'Secondary'){{'selected'}}@endif>Secondary</option>
                         </select>
                         @include('admin.inc.error_message',['name'=>'status'])
+                      </div> -->
+
+                      <div class="form-group">
+                        <label for="title">Banner Title</label>
+                        <textarea id="title" class="form-control @error('title') is-invalid @enderror" name="title">{{ $is_edit ? $banner->title : '' }}</textarea>
+                        @include('admin.inc.error_message',['name'=>'title']) 
                       </div>
 
                       <div class="form-group">
                         <label for="link">Banner Subtitle</label>
-                        <textarea id="subtitle" class="form-control ckeditor @error('subtitle') is-invalid @enderror" name="subtitle">{{ $is_edit ? $banner->subtitle : '' }}</textarea>
+                        <textarea id="subtitle" class="form-control @error('subtitle') is-invalid @enderror" name="subtitle">{{ $is_edit ? $banner->subtitle : '' }}</textarea>
                         @include('admin.inc.error_message',['name'=>'subtitle']) 
                       </div>
 
                       <div class="form-group">
                         <label for="tagline">Banner Tagline</label>
-                        <textarea id="tagline" class="form-control ckeditor @error('tagline') is-invalid @enderror" name="tagline">{{ $is_edit ? $banner->tagline : '' }}</textarea>
+                        <textarea id="tagline" class="form-control @error('tagline') is-invalid @enderror" name="tagline">{{ $is_edit ? $banner->tagline : '' }}</textarea>
                         @include('admin.inc.error_message',['name'=>'tagline']) 
                       </div>
 
-                      <div class="form-group">
+                      <!-- <div class="form-group">
                         <label for="button_title">Button Title</label>
                         <input id="button_title" class="form-control @error('button_title') is-invalid @enderror" name="button_title" type="text" value="{{ $is_edit ? $banner->button_title : '' }}" >
                         @include('admin.inc.error_message',['name'=>'button_title']) 
@@ -63,7 +62,7 @@
                         <label for="link">Button Link</label>
                         <input id="link" class="form-control @error('link') is-invalid @enderror" name="link" type="text" value="{{ $is_edit ? $banner->link : '' }}" >
                         @include('admin.inc.error_message',['name'=>'link']) 
-                      </div>
+                      </div> -->
 
 
                       <div class="form-group">
@@ -85,7 +84,7 @@
                       <div class="form-group">
                         <label for="status">Status</label>
                         <select class="form-control form-control-lg py-3 @error('status') is-invalid @enderror" id="status" name="status">
-                          <option selected disabled="">Select Status</option>
+                          <option>Select Status</option>
                           <option value="1" @if(@$banner->status == '1') {{'selected'}}@endif>Active</option>
                           <option value="0" @if(@$banner->status == '0'){{'selected'}}@endif>Inactive</option>
                         </select>

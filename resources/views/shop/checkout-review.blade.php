@@ -30,7 +30,7 @@
               <i class="ci-cart"></i>Cart
             </div>
           </a>
-          <a class="step-item active" href="{{route('checkout-details')}}">
+          <a class="step-item active" href="{{route('checkout')}}">
             <div class="step-progress">
               <span class="step-count">2</span>
             </div>
@@ -101,7 +101,7 @@
         </div>
         <!-- Navigation (desktop)-->
         <div class="d-none d-lg-flex pt-4">
-          <div class="w-50 pe-3"><a class="btn btn-secondary d-block w-100" href="{{route('checkout-details')}}"><i class="ci-arrow-left mt-sm-0 me-1"></i><span class="d-none d-sm-inline">Back to Shipping Details</span><span class="d-inline d-sm-none">Back</span></a></div>
+          <div class="w-50 pe-3"><a class="btn btn-secondary d-block w-100" href="{{route('checkout')}}"><i class="ci-arrow-left mt-sm-0 me-1"></i><span class="d-none d-sm-inline">Back to Shipping Details</span><span class="d-inline d-sm-none">Back</span></a></div>
           <div class="w-50 ps-2"><a class="btn btn-primary d-block w-100" href="{{ route('checkout-payment') }}"><span class="d-none d-sm-inline">Select Payment Method</span><span class="d-inline d-sm-none">Complete</span><i class="ci-arrow-right mt-sm-0 ms-1"></i></a></div>
         </div>
       </section>
@@ -132,7 +132,7 @@
     <div class="row d-lg-none">
       <div class="col-lg-8">
         <div class="d-flex pt-4 mt-3">
-          <div class="w-50 pe-3"><a class="btn btn-secondary d-block w-100" href="{{ route('checkout-details') }}"><i class="ci-arrow-left mt-sm-0 me-1"></i><span class="d-none d-sm-inline">Back to Shipping Details</span><span class="d-inline d-sm-none">Back</span></a></div>
+          <div class="w-50 pe-3"><a class="btn btn-secondary d-block w-100" href="{{ route('checkout') }}"><i class="ci-arrow-left mt-sm-0 me-1"></i><span class="d-none d-sm-inline">Back to Shipping Details</span><span class="d-inline d-sm-none">Back</span></a></div>
           <div class="w-50 ps-2"><a class="btn btn-primary d-block w-100" href="{{ route('checkout-payment') }}"><span class="d-none d-sm-inline">Select Payment Method</span><span class="d-inline d-sm-none">Complete</span><i class="ci-arrow-right mt-sm-0 ms-1"></i></a></div>
         </div>
       </div>

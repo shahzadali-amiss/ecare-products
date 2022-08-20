@@ -3,7 +3,7 @@
 <meta http-equiv="content-type" content="text/html;charset=utf-8" />
 <head>
     <meta charset="utf-8">
-    <title>MAHIR BHARAT | Online Store</title>
+    <title>Recycle Shop | Ecommerce Store</title>
     <!-- SEO Meta Tags-->
     <meta name="description" content="AtaaHai - Bootstrap E-commerce Template">
     <meta name="keywords" content="bootstrap, shop, e-commerce, market, modern, responsive,  business, mobile, bootstrap, html5, css3, js, gallery, slider, touch, creative, clean">
