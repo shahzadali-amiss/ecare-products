@@ -8,6 +8,9 @@
           <h4 class="card-title">All Banners <a href="{{ route('add_ad_banner') }}" class="btn btn-primary ms-3"> Add New Banner </a></h4>
           <div class="row">
             <div class="col-12">
+              <div class="col-12">
+               @include('admin.inc.session-message')
+              </div>
               <div class="table-responsive">
                 <table id="order-listing" class="table">
                   <thead>
@@ -41,12 +44,12 @@
                           @endif                         
                         </td>
                         <td class="text-right">
-                          <a href="" class="btn btn-light">
+                          <a href="{{ route('add_ad_banner', $banner->id) }}" class="btn btn-light">
                             <i class="ti-pencil-alt text-warning"></i>Edit
                           </a>
-                          <a href="" class="btn btn-light">
-                            <i class="ti-close text-danger"></i>Remove
-                          </a>
+                          <a onclick="return confirm('Are you sure?')" href="{{route('admin-remove', ['type'=>'b', 'id'=>$banner->id])}}" class="btn btn-light">
+                              <i class="ti-close text-danger"></i>Remove
+                            </a>
                         </td>
                     </tr>
                     @endforeach

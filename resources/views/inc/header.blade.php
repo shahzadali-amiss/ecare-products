@@ -3,7 +3,7 @@
 <meta http-equiv="content-type" content="text/html;charset=utf-8" />
 <head>
     <meta charset="utf-8">
-    <title>Recycle Shop | Ecommerce Store</title>
+    <title>Ecare | Products</title>
     <!-- SEO Meta Tags-->
     <meta name="description" content="AtaaHai - Bootstrap E-commerce Template">
     <meta name="keywords" content="bootstrap, shop, e-commerce, market, modern, responsive,  business, mobile, bootstrap, html5, css3, js, gallery, slider, touch, creative, clean">

@@ -236,6 +236,7 @@ class AdminController extends Controller
     public function addProduct(Request $request, $edit_id = null){
         //If request method is get
         if($request->isMethod('get')){
+
         //CHECK EDIT MODE
             $is_edit = is_null($edit_id) ? false : true;
             $data['attributes']=Attribute::with('getAttributeValues')->where('category_id', Session::get('child_category'))->get();
@@ -347,9 +348,13 @@ class AdminController extends Controller
             } 
 
             if($is_edit){
+                // dd($request->all());
                 if($request->file2){
                     $image2=isImageExist($request->edit_id, 2);
-                    if(!$image2->isEmpty()){
+                    if($image2!=null){
+                    // dd(gettype($image2));
+
+                        // dd($image2->toArray());
                         $image2->image=replaceProductImage($request,'file2',$image2->image);
                         $image2->save();
                     }else{
@@ -365,7 +370,7 @@ class AdminController extends Controller
                 }
                 if($request->file3){
                     $image3=isImageExist($request->edit_id, 3);
-                    if(!$image3->isEmpty()){
+                    if($image3 != null){
                         $image3->image=replaceProductImage($request,'file3',$image3->image);
                         $image3->save();
                     }else{
@@ -381,7 +386,7 @@ class AdminController extends Controller
                 }
                 if($request->file4){
                     $image4=isImageExist($request->edit_id, 4);
-                    if(!$image4->isEmpty()){
+                    if($image4 != null){
                         $image4->image=replaceProductImage($request,'file4',$image4->image);
                         $image4->save();
                     }else{
@@ -397,7 +402,7 @@ class AdminController extends Controller
                 }
                 if($request->file5){
                     $image5=isImageExist($request->edit_id, 5);
-                    if(!$image5->isEmpty()){
+                    if($image5 != null){
                         $image5->image=replaceProductImage($request,'file5',$image->image);
                         $image5->save();
                     }else{
@@ -452,7 +457,7 @@ class AdminController extends Controller
 
                 if($is_edit){
                     $msg='Product Updated';
-                    return redirect()->route('admin-all-products')->with('success', $msg);
+                    return back()->with('success', $msg);
                 }else{
                     Session::forget('grand_category');
                     Session::forget('parent_category');

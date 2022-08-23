@@ -50,7 +50,9 @@ Route::any('admin/login', [FrontController::class, 'adminLogin'])->name('admin-l
         // routes to view products of website
 Route::get('shop/product/single/{id}',[FrontController::class , 'showSingleProduct'])->name('single'); 
 Route::get('shop/products/{gid}/{pid}/{cid}', [FrontController::class , 'products'])->name('products');
-Route::get('shop/products', [FrontController::class , 'allProducts'])->name('all-products');  
+Route::get('shop/products', [FrontController::class , 'allProducts'])->name('all-products'); 
+Route::get('privacy', [FrontController::class , 'privacy'])->name('privacy');  
+Route::get('Terms-and-Conditions', [FrontController::class , 'terms'])->name('terms_conditions');  
 
 //GUEST ROUTES ENDS HERE
 

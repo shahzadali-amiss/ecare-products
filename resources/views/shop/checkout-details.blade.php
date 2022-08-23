@@ -16,8 +16,8 @@
                                 <div class="elementor-widget-container">
                                     <div class="organey-woocommerce-title">Checkout</div>
                                     <nav class="woocommerce-breadcrumb"><a
-                                            href="https://demo.leebrosus.com/organey">Home</a><i aria-hidden="true"
-                                            class="organey-icon-angle-right"></i>Checkout</nav>
+                                        href="{{ route('welcome') }}">Home</a><i aria-hidden="true"
+                                        class="organey-icon-angle-right"></i>Checkout</nav>
                                 </div>
                             </div>
                         </div>
@@ -35,6 +35,7 @@
                     <div class="entry-content">
                         <div class="woocommerce">
                             <div class="woocommerce-notices-wrapper"></div>
+                            @include('inc.session-message')
                             <form name="checkout" method="post" action="{{ route('checkout') }}">
                             @csrf
                                 <div class="col2-set" id="customer_details">
@@ -58,15 +59,26 @@
                                                     </label>
                                                     <span class="woocommerce-input-wrapper">
                                                         <textarea
-                                                            name="order_comments" class="input-text "
-                                                            id=""
-                                                            placeholder="Notes about your order, e.g. special notes for delivery."
-                                                            rows="2" cols="5"></textarea></span></p>
+                                                        name="order_comments" class="input-text "
+                                                        id=""
+                                                        placeholder="Notes about your order, e.g. special notes for delivery."
+                                                        rows="2" cols="5">    
+                                                        </textarea>
+                                                    </span>
+                                                </p>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                                 <h3 id="order_review_heading">Your order</h3>
+                                {{-- @if($items->isEmpty())
+                                    <div class="woocommerce">
+                                        <img src="{{ asset('images/emptycart.png') }}" style="margin: 0 auto 50px auto;">
+                                        <p class="return-to-shop" style="text-align:center;">
+                                            <a class="button wc-backward" href="{{ route('all-products') }}">Return to shop</a>
+                                        </p>
+                                    </div>
+                                @else --}}
                                 <div id="order_review" class="woocommerce-checkout-review-order">
                                     <table class="shop_table woocommerce-checkout-review-order-table">
                                         <thead>
@@ -75,49 +87,55 @@
                                                 <th class="product-total">Subtotal</th>
                                             </tr>
                                         </thead>
+                                        
                                         <tbody>
-                                            <tr class="cart_item">
-                                                <td class="product-name">
-                                                    Wrapped Cabbage&nbsp; <strong
-                                                        class="product-quantity">&times;&nbsp;2</strong> </td>
+
+                                            @php $total = 0 @endphp
+                                            @foreach($items as $item)
+                                                @php 
+                                                    $image = $item->product->image;
+                                                    $item_id = $item->id;
+                                                @endphp
+                                            <tr class="cart_item woocommerce-cart-form__cart-item">
+                                                <td class="product-thumbnail">
+                                                    <a href="#"><img width="50" height="50" src='{{ asset("product_images/$image") }}' class="attachment-woocommerce_thumbnail size-woocommerce_thumbnail" alt=""
+                                                        srcset='{{ asset("product_images/$image") }}'
+                                                        sizes="(max-width: 50px) 100vw, 50px" /></a>
+                                                    {{ ucwords($item->product->name) }}<strong
+                                                        class="product-quantity">&times;&nbsp;{{ $item->quantity }}</strong> </td>
                                                 <td class="product-total">
-                                                    <span class="woocommerce-Price-amount amount"><bdi><span
-                                                                class="woocommerce-Price-currencySymbol">&pound;</span>1,565.84</bdi></span>
+                                                    <span class="woocommerce-Price-amount amount">
+                                                        <bdi>
+                                                        <span class="woocommerce-Price-currencySymbol">₹
+                                                        </span>{{ $item_total = $item->price * $item->quantity }}</bdi>
+                                                    </span>
                                                 </td>
                                             </tr>
-                                            <tr class="cart_item">
-                                                <td class="product-name">
-                                                    Steers Tomato Sauce 375ml&nbsp; <strong
-                                                        class="product-quantity">&times;&nbsp;1</strong> </td>
-                                                <td class="product-total">
-                                                    <span class="woocommerce-Price-amount amount"><bdi><span
-                                                                class="woocommerce-Price-currencySymbol">&pound;</span>91.38</bdi></span>
-                                                </td>
-                                            </tr>
-                                            <tr class="cart_item">
-                                                <td class="product-name">
-                                                    Peppered Mackerel Fillets 200g&nbsp; <strong
-                                                        class="product-quantity">&times;&nbsp;1</strong> </td>
-                                                <td class="product-total">
-                                                    <span class="woocommerce-Price-amount amount"><bdi><span
-                                                                class="woocommerce-Price-currencySymbol">&pound;</span>14.84</bdi></span>
-                                                </td>
-                                            </tr>
+                                            
+                                            @php $total += $item_total @endphp
+
+                                            @endforeach
+                                            
                                         </tbody>
                                         <tfoot>
                                             <tr class="cart-subtotal">
                                                 <th>Subtotal</th>
-                                                <td><span class="woocommerce-Price-amount amount"><bdi><span
-                                                                class="woocommerce-Price-currencySymbol">&pound;</span>1,672.06</bdi></span>
+                                                <td><span class="woocommerce-Price-amount amount"><bdi><span class="woocommerce-Price-currencySymbol">₹</span>
+                                                    {{ $total }}
+                                                 </bdi></span>
                                                 </td>
                                             </tr>
                                             <tr class="order-total">
                                                 <th>Total</th>
-                                                <td><strong><span class="woocommerce-Price-amount amount"><bdi><span
-                                                                    class="woocommerce-Price-currencySymbol">&pound;</span>1,672.06</bdi></span></strong>
+                                                <td><strong><span class="woocommerce-Price-amount amount"><bdi>
+                                                <span class="woocommerce-Price-currencySymbol">₹
+                                                </span>
+                                                {{ $total }}</bdi>
+                                                </span></strong>
                                                 </td>
                                             </tr>
                                         </tfoot>
+                                        
                                     </table>
                                     <div id="payment" class="woocommerce-checkout-payment">
                                         <ul class="wc_payment_methods payment_methods methods">
@@ -131,7 +149,7 @@
                                                 <div class="woocommerce-privacy-policy-text">
                                                     <p>Your personal data will be used to process your order, support
                                                         your experience throughout this website, and for other purposes
-                                                        described in our <a href=""
+                                                        described in our <a href="{{ route('privacy') }}"
                                                             class="woocommerce-privacy-policy-link"
                                                             target="_blank">privacy policy</a>.</p>
                                                 </div>
@@ -142,6 +160,8 @@
                                         </div>
                                     </div>
                                 </div>
+                                {{-- @endif --}}
+
                             </form>
                         </div>
                     </div>

@@ -16,7 +16,7 @@
                             <div class="elementor-widget-container">
                                 <div class="organey-woocommerce-title">Cart</div>
                                 <nav class="woocommerce-breadcrumb"><a
-                                href="https://demo.leebrosus.com/organey">Home</a><i aria-hidden="true"
+                                href="{{ route('welcome') }}">Home</a><i aria-hidden="true"
                                 class="organey-icon-angle-right"></i>Cart</nav>
                             </div>
                         </div>
@@ -74,17 +74,13 @@
                                                 <tr class="woocommerce-cart-form__cart-item cart_item">
 
                                                     <td class="product-thumbnail">
-                                                        <a href="#"><img
-                                                                width="400" height="400"
-                                                                src='{{ asset("product_images/$image") }}'
-                                                                class="attachment-woocommerce_thumbnail size-woocommerce_thumbnail"
-                                                                alt=""
-                                                                srcset='{{ asset("product_images/$image") }}'
-                                                                sizes="(max-width: 400px) 100vw, 400px" /></a>
+                                                        <a href="#"><img width="400" height="400" src='{{ asset("product_images/$image") }}' class="attachment-woocommerce_thumbnail size-woocommerce_thumbnail" alt=""
+                                                        srcset='{{ asset("product_images/$image") }}'
+                                                        sizes="(max-width: 400px) 100vw, 400px" /></a>
                                                     </td>
 
                                                     <td class="product-name" data-title="Product">
-                                                        <a href="https://demo.leebrosus.com/organey/product/wrapped-cabbage/">
+                                                        <a href="">
                                                             {{ ucwords($item->product->name) }}
                                                         </a>
                                                     </td>

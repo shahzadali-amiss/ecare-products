@@ -24,7 +24,7 @@ $(".add-to-cart").click(function(){
     let qty = $(this).parent().find('.item.qty').val();
     let pid = $(this).parent().find('.item.pid').val();
 
-    $.post("/api/add_to_cart",
+    $.post(base_url+"/api/add_to_cart",
     {
       pid: pid,
       qty: qty,

@@ -73,3 +73,11 @@ ul.pagination li.active {
 .hfe-site-logo-container img {
     width: 75%;
 }
+
+
+.elementor-widget-heading .privacy .elementor-heading-title{
+    /*color: #000;*/
+    color: var(--accent);
+    padding-bottom:10px;
+    padding-top:15px;
+}

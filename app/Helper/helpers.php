@@ -90,16 +90,19 @@ function moveProductImage($file, $name){
 }
 
 function replaceProductImage($file, $name, $oldImage){
+    // dd('work');
 	$destinationPath = public_path( '/product_images' );
     $image = $file->$name;
     $fileName = 'image'.rand(11111111111111,99999999999999). '.'.$image->clientExtension();
     $image->move( $destinationPath, $fileName );
+    if(!$image=='null'){
     unlink(public_path('product_images/'.$oldImage));
+    }
     return $fileName;
 }
 
 function isImageExist($type_id, $priority){
-	$image=Image::where('type_id', $type_id)->where('priority', $priority)->where('status', true)->get();
+	$image=Image::where('type_id', $type_id)->where('priority', $priority)->where('status', true)->get()->first();
     return $image;
 }
 

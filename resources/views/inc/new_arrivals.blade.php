@@ -109,9 +109,11 @@
 
                                                 <div class="product-img-wrap none"> 
                                                   <div class="inner">
+                                                    <a href="{{ route('single', $product->id) }}">
                                                     <div class="product-image">
                                                       <img width="400" height="400" src='{{ asset("product_images/$product->image") }}' sizes="(max-width: 400px) 100vw, 400px" \/>
-                                                    </div> 
+                                                    </div>
+                                                    </a> 
                                                   </div> 
                                                 </div>
                                                 <div class="quick-shop-wrapper"> 

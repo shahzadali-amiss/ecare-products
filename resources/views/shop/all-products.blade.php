@@ -18,7 +18,7 @@
                                 <div class="elementor-widget-container">
                                     <div class="organey-woocommerce-title">Shop</div>
                                     <nav class="woocommerce-breadcrumb"><a
-                                            href="https://demo.leebrosus.com/organey">Home</a><i aria-hidden="true"
+                                            href="{{ route('welcome') }}">Home</a><i aria-hidden="true"
                                             class="organey-icon-angle-right"></i>Shop</nav>
                                 </div>
                             </div>
@@ -82,7 +82,7 @@
                                   </span>
                                 </div>
                                 <h2 class="woocommerce-loop-product__title">
-                                  <a href="https:\/\/demo.leebrosus.com\/organey\/product\/papaya-single\/">
+                                  <a href="{{ route('single', $product->id) }}">
                                       {{ ucwords($product->name) }}
                                   </a>
                                 </h2>

@@ -46,10 +46,17 @@
       image.src = URL.createObjectURL(event.target.files[0]);
     };
     function deleteProductImage(imageId){
-      alert(imageId);
+      if (confirm('Are you sure to delete?') == false)
+        return;
+
+      // alert(imageId);
       var url = '/api/delete-product-image/'+(imageId);
       $.get(url, function(data, status){
-        console.log(data);  
+        // console.log(data);
+        if(data.status == true)
+          location.reload();
+        else
+          alert('whoops, something went wrong? Please try after sometime')
       });
     }
 

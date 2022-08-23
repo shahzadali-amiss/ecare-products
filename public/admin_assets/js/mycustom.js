@@ -102,6 +102,16 @@ $('.child_category').on('change', function(){
 	  });
 });
 
+let isConfirmed = false;
+$('.removeItem').on('click', function(){
+    let text = "Are you sure to delete?";
+    if (confirm(text) == true) {
+        isConfirmed = true;
+        return true;
+    } else {
+        return false;
+    }
+})
 
     
 

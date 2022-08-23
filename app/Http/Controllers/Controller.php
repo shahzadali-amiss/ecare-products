@@ -9,6 +9,7 @@ use Illuminate\Routing\Controller as BaseController;
 use App\Models\Category;
 use App\Models\Product;
 use App\Models\Image;
+use App\Models\BannerAds;
 use App\Models\City;
 use App\Models\User;
 use Session;
@@ -51,9 +52,23 @@ class Controller extends BaseController
             return redirect()->route('admin-all-categories');
         }           
         }
+        elseif ($type == 'b') {
+        $data = BannerAds::find($id); 
+        if(is_null($data)){
+            
+            Session::flash('msg', 'Data already deleted');
+            return redirect()->route('admin-all-products'); 
+        }
+        else{
+            $data->delete();
+            Session::flash('msg', 'Data Deleted successfully');
+            return redirect()->route('list_banners');
+        }           
+        }
     }
 
     public function deleteProduct($id){
+        // dd('hfgduhf')
         $product=Product::find($id);
         if($product){
             $images=Image::where(['type' => 'p', 'type_id' => $id])->get();
@@ -102,7 +117,11 @@ class Controller extends BaseController
 
     protected function deleteProductImage($id){
         $image=Image::find($id);
-        // unlink(public_path('product_images/'.$image->image)) && $image->delete()
+        // dd($image);
+        if($image!==null and $image->image!=null){
+
+            unlink(public_path('product_images/'.$image->image)) && $image->delete();
+        }
         if( $image ){
             return response()->json(['status'=>true, 'data' => $image], 200);
         }

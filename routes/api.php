@@ -31,7 +31,7 @@ Route::post('add_to_cart', [ApiController::class, 'addItemIntoCart']);
 Route::get('get_cart_items', [ApiController::class, 'getCartItems']);
 Route::post('remove_from_cart', [ApiController::class, 'removeFromCart']);
 
-//Route::delete('/delete-product-image/{id}', [Controller::class, 'deleteProductImage']);
+Route::get('/delete-product-image/{id}', [Controller::class, 'deleteProductImage']);
 //Route::post('/home/addtocart', [Controller::class, 'addtocart']);
 
 

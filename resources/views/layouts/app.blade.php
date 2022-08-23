@@ -146,7 +146,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="profile" href="http://gmpg.org/xfn/11">
-    <title>Recycle Shop</title>
+    <title>Ecare Products</title>
     <style id="rocket-critical-css">
       .bhf-hidden {
         display: none
@@ -4750,7 +4750,7 @@
     <link rel='shortlink' href='index.html' />
     <link rel="alternate" type="application/json+oembed" href="{{ asset('frontend/json/oembed/1.0/embedc389.json?url=https%3A%2F%2Fdemo.leebrosus.com%2Forganey%2F') }}" />
     <link rel="alternate" type="text/xml+oembed" href="{{ asset('frontend/json/oembed/1.0/embedee66?url=https%3A%2F%2Fdemo.leebrosus.com%2Forganey%2F&amp;format=xml') }}" />
-    <!-- <link rel="icon" href="https://demothemedh.b-cdn.net/favicon.ico" type="image/x-icon" /> -->
+    <link rel="icon" href="{{ asset('images/favicon.png') }}" type="image/x-icon" />
     <link rel="dns-prefetch" href="http://fonts.googleapis.com/">
     <link rel="dns-prefetch" href="http://s.w.org/">
     <noscript>
@@ -5047,9 +5047,8 @@
                         </div>
                       </div>
                       <div class="elementor-element elementor-element-cd0e059 elementor-widget elementor-widget-text-editor" data-id="cd0e059" data-element_type="widget" data-widget_type="text-editor.default">
-                        <div class="elementor-widget-container">Indian Pollution Control Association
-3-5, DDA Shopping Complex, Hargobind Enclave,
-Vikas Marg Ext., Delhi – 110092</div>
+                        <div class="elementor-widget-container">We reserve the right to modify the existent privacy policy at any time; hence it is important that you review
+                        </div>
                       </div>
                       <div class="elementor-element elementor-element-e482e49 elementor-icon-list--layout-traditional elementor-list-item-link-full_width elementor-widget elementor-widget-icon-list" data-id="e482e49" data-element_type="widget" data-widget_type="icon-list.default">
                         <div class="elementor-widget-container">
@@ -5088,22 +5087,22 @@ Vikas Marg Ext., Delhi – 110092</div>
                         <div class="elementor-widget-container">
                           <ul class="elementor-icon-list-items">
                             <li class="elementor-icon-list-item">
-                              <a href="about-us/index.html">
+                              <a href="#">
                                 <span class="elementor-icon-list-text">About us</span>
                               </a>
                             </li>
                             <li class="elementor-icon-list-item">
-                              <a href="blog/index.html">
-                                <span class="elementor-icon-list-text">Blog</span>
+                              <a href="{{ route('privacy') }}">
+                                <span class="elementor-icon-list-text">Privacy Policy</span>
+                              </a>
+                            </li>
+                            <li class="elementor-icon-list-item">
+                              <a href="{{ route('terms_conditions') }}">
+                                <span class="elementor-icon-list-text">Terms and Conditions</span>
                               </a>
                             </li>
                             <li class="elementor-icon-list-item">
                               <a href="#">
-                                <span class="elementor-icon-list-text">Check out</span>
-                              </a>
-                            </li>
-                            <li class="elementor-icon-list-item">
-                              <a href="contact/index.html">
                                 <span class="elementor-icon-list-text">Contact</span>
                               </a>
                             </li>
@@ -5128,22 +5127,22 @@ Vikas Marg Ext., Delhi – 110092</div>
                         <div class="elementor-widget-container">
                           <ul class="elementor-icon-list-items">
                             <li class="elementor-icon-list-item">
-                              <a href="my-account/index.html">
+                              <a href="#">
                                 <span class="elementor-icon-list-text">My Account</span>
                               </a>
                             </li>
                             <li class="elementor-icon-list-item">
-                              <a href="contact/index.html">
+                              <a href="#">
                                 <span class="elementor-icon-list-text">Contact</span>
                               </a>
                             </li>
                             <li class="elementor-icon-list-item">
-                              <a href="shop/index.html">
+                              <a href="#">
                                 <span class="elementor-icon-list-text">Shopping cart</span>
                               </a>
                             </li>
                             <li class="elementor-icon-list-item">
-                              <a href="shop/index.html">
+                              <a href="#">
                                 <span class="elementor-icon-list-text">Shop</span>
                               </a>
                             </li>
@@ -5163,27 +5162,27 @@ Vikas Marg Ext., Delhi – 110092</div>
                         <div class="elementor-widget-container">
                           <ul class="elementor-icon-list-items">
                             <li class="elementor-icon-list-item">
-                              <a href="shop/index.html">
-                                <span class="elementor-icon-list-text">Fruits & Vegetables</span>
+                              <a href="#">
+                                <span class="elementor-icon-list-text">Table & Banches</span>
                               </a>
                             </li>
                             <li class="elementor-icon-list-item">
-                              <a href="shop/index.html">
+                              <a href="#">
                                 <span class="elementor-icon-list-text"> Dairy Products</span>
                               </a>
                             </li>
                             <li class="elementor-icon-list-item">
-                              <a href="shop/index.html">
+                              <a href="#">
                                 <span class="elementor-icon-list-text">Package Foods</span>
                               </a>
                             </li>
                             <li class="elementor-icon-list-item">
-                              <a href="shop/index.html">
+                              <a href="#">
                                 <span class="elementor-icon-list-text"> Beverage</span>
                               </a>
                             </li>
                             <li class="elementor-icon-list-item">
-                              <a href="shop/index.html">
+                              <a href="#">
                                 <span class="elementor-icon-list-text"> Health & Wellness</span>
                               </a>
                             </li>
@@ -5203,7 +5202,7 @@ Vikas Marg Ext., Delhi – 110092</div>
           <div class="elementor-column elementor-col-50 elementor-top-column elementor-element elementor-element-12c389c" data-id="12c389c" data-element_type="column">
             <div class="elementor-widget-wrap elementor-element-populated">
               <div class="elementor-element elementor-element-3d904b3 elementor-widget elementor-widget-text-editor" data-id="3d904b3" data-element_type="widget" data-widget_type="text-editor.default">
-                <div class="elementor-widget-container"> Copyright © 2021 <a href=""> Recycle Shop</a>. All Rights Reserved. </div>
+                <div class="elementor-widget-container"> Copyright © 2021 <a href=""> Ecare Shop</a>. All Rights Reserved. </div>
               </div>
             </div>
           </div>

@@ -366,4 +366,12 @@ class FrontController extends Controller
         return view('shop.all-products')->with($data);
        
     }
+
+    public function privacy(){
+        return view('layouts.privacy');
+    }
+
+    public function terms(){
+        return view('layouts.terms-and-conditions');
+    }
 }

@@ -5,7 +5,8 @@
     <div class="col-12">  
       <div class="card"> 
         <div class="card-body">
-          <h4 class="card-title">{{$is_edit ? 'Edit Ad Banner' : 'Add New Ad Banner'}}</h4>
+          <h4 class="card-title">
+          {{$is_edit ? 'Edit Ad Banner' : 'Add New Ad Banner'}}</h4>
           <div class="row">
             <div class="col-12">
 
@@ -16,7 +17,7 @@
             <div class="col-lg-12">
               <div class="card">
                 <div class="card-body">
-                  <form class="cmxform" id="add-product-form" method="post" action="{{ route('add_ad_banner',$is_edit) }}" enctype="multipart/form-data">
+                  <form class="cmxform" id="add-product-form" method="post" action="{{ route('add_ad_banner', $is_edit) }}" enctype="multipart/form-data">
                     @csrf
                     <fieldset> 
                     @if($is_edit)
@@ -84,7 +85,7 @@
                       <div class="form-group">
                         <label for="status">Status</label>
                         <select class="form-control form-control-lg py-3 @error('status') is-invalid @enderror" id="status" name="status">
-                          <option>Select Status</option>
+                          {{-- <option>Select Status</option> --}}
                           <option value="1" @if(@$banner->status == '1') {{'selected'}}@endif>Active</option>
                           <option value="0" @if(@$banner->status == '0'){{'selected'}}@endif>Inactive</option>
                         </select>
